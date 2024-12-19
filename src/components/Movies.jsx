@@ -1,14 +1,3 @@
-// ListMovies.propTypes = {
-//     movies: PropTypes.arrayOf(PropTypes.shape({
-//         imdbID: PropTypes.string.isRequired,
-//         Title: PropTypes.string.isRequired,
-//         Year: PropTypes.string.isRequired,
-//         Poster: PropTypes.string.isRequired
-//     })).isRequired
-// };
-
-// import PropTypes from 'prop-types';
-
 // eslint-disable-next-line react/prop-types
 export function ListMovies({movies}){
     return(

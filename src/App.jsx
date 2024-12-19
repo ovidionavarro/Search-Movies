@@ -1,18 +1,10 @@
 import './App.css'
 import { Movies } from './components/Movies'
-import responseMovies from './models/movie.json'
-// import errorMovies from './models/error.json'
+import { UseMovies } from './Hooks/UseMovies'
+
 
 function App() {
-  const movies=responseMovies.Search
-  
-  const mapMovies=movies.map(movie=>({
-    id:movie.imdbID,
-    title:movie.Title,
-    year:movie.Year,
-    poster:movie.Poster
-    }))
-
+  const {movies:mapMovies}=UseMovies()
   return(
       <div className='page' >
         <header>
