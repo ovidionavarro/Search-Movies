@@ -1,10 +1,17 @@
 import './App.css'
+import { Movies } from './components/Movies'
 import responseMovies from './models/movie.json'
 // import errorMovies from './models/error.json'
 
 function App() {
   const movies=responseMovies.Search
-  const hasMovies=movies?.length>0
+  
+  const mapMovies=movies.map(movie=>({
+    id:movie.imdbID,
+    title:movie.Title,
+    year:movie.Year,
+    poster:movie.Poster
+    }))
 
   return(
       <div className='page' >
@@ -20,25 +27,7 @@ function App() {
           </div>
       </header>
       <main>
-        {
-          hasMovies
-          ?(
-            <ul>
-              {
-                movies.map(movie=>(
-                  <li key={movie.imdbID}>
-                      <h3>{movie.Title}</h3>
-                      <p>{movie.Year}</p>
-                      <img src={movie.Poster} alt={movie.Title}/>
-                  </li>
-                ))
-              }
-            </ul>
-          ):
-          <p>Nose encontraron resultados</p>
-
-        }
-        
+        <Movies movies={mapMovies}/>
       </main>
     </div>
   )
