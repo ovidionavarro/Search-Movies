@@ -1,13 +1,41 @@
 // import { useRef } from 'react'
 import './App.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Movies } from './components/Movies'
 import { UseMovie } from './Hooks/UseMovie'
 
+function UseSearch(){
+  const [search,updateSearch]=useState('')
+  const [error,setError]=useState('')
+
+
+  useEffect(() => {
+    if (search==''){
+     setError('Not found movie empty')
+     return
+   }
+ 
+    if(search.match(/^\d+$/)){
+     setError('not found movie whit number')
+     return
+   }
+    if(search.length<3){
+     setError('The search should be longer than three characters')
+     return
+   }
+   setError(null)
+  
+   
+  }, [search])
+
+  return {search,updateSearch,error}
+}
+
 
 function App() {
-  const {mappedMovies}=UseMovie()
-  const [query,setQuery]=useState('')
+  // const [query,setQuery]=useState('')
+  const {mappedMovies}=UseMovie() 
+  const {search,updateSearch,error}=UseSearch()
 
 //forma no controlada
   // const handleSubmit=(e)=>{
@@ -18,25 +46,27 @@ function App() {
   // }
   const handleSubmit=(e)=>{
     e.preventDefault()
-    console.log({query})
+    console.log({search})
   }
-
   const handleChange=(e)=>{
-    setQuery(e.target.value)
+    updateSearch(e.target.value)
+    return
   }
-
-
-
 
   return(
     <div className='page'>
         <h1> SearchMovies</h1>
         <header>
           <form className='form' onSubmit={handleSubmit}>
-            <input value={query} onChange={handleChange} name='query' placeholder='avengers, startwars' />            
+            <input value={search} onChange={handleChange} name='search' placeholder='avengers, startwars' 
+            style={{
+              border:'1px solid transparent',
+              borderColor:error?'red':'transparent'
+            }}/>            
             <button type='submit'>Search</button>
           </form>
         </header>
+        {error&& <p style={{color:'red'}}>{error}</p>}
 
         <main>
           <Movies movies={mappedMovies}/>
