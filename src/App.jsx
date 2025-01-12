@@ -39,8 +39,8 @@ function UseSearch(){
 
 function App() {
   // const [query,setQuery]=useState('')
-  const {mappedMovies}=UseMovie() 
   const {search,updateSearch,error}=UseSearch()
+  const {mappedMovies,getMovie}=UseMovie({search}) 
 
 //forma no controlada
   // const handleSubmit=(e)=>{
@@ -51,7 +51,7 @@ function App() {
   // }
   const handleSubmit=(e)=>{
     e.preventDefault()
-    console.log({search})
+    getMovie()
   }
   const handleChange=(e)=>{
     updateSearch(e.target.value)
