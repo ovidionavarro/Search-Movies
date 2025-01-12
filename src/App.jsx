@@ -1,15 +1,20 @@
 // import { useRef } from 'react'
 import './App.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Movies } from './components/Movies'
 import { UseMovie } from './Hooks/UseMovie'
 
 function UseSearch(){
   const [search,updateSearch]=useState('')
   const [error,setError]=useState('')
-
+  const isFirstInput=useRef(true)//para saber primera vez de algo
 
   useEffect(() => {
+    if(isFirstInput.current){
+      isFirstInput.current=search===''
+      return
+    }
+
     if (search==''){
      setError('Not found movie empty')
      return
