@@ -52,16 +52,20 @@ function App() {
   // }
   const handleSubmit=(e)=>{
     e.preventDefault()
-    getMovie()
+    getMovie({search})
   }
   const handleChange=(e)=>{
+    const newSearch=e.target.value
     updateSearch(e.target.value)
-    return
+    getMovie({search:newSearch})
   }
 
   const handleSort=()=>{
     setSort(!sort)
   }
+  useEffect(()=>{
+    console.log('dasdas')
+  },[getMovie])
 
   return(
     <div className='page'>
