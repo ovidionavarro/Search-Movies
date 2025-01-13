@@ -40,7 +40,7 @@ function UseSearch(){
 function App() {
   // const [query,setQuery]=useState('')
   const {search,updateSearch,error}=UseSearch()
-  const {mappedMovies,getMovie}=UseMovie({search}) 
+  const {movies,getMovie}=UseMovie({search}) 
 
 //forma no controlada
   // const handleSubmit=(e)=>{
@@ -74,7 +74,7 @@ function App() {
         {error&& <p style={{color:'red'}}>{error}</p>}
 
         <main>
-          <Movies movies={mappedMovies}/>
+          <Movies movies={movies}/>
 
         </main>
 
