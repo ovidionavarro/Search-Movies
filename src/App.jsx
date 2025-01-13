@@ -38,9 +38,10 @@ function UseSearch(){
 
 
 function App() {
-  // const [query,setQuery]=useState('')
+  const [sort, setSort] = useState(false)
+  
   const {search,updateSearch,error}=UseSearch()
-  const {movies,getMovie,loading}=UseMovie({search}) 
+  const {movies,getMovie,loading}=UseMovie({search,sort}) 
 
 //forma no controlada
   // const handleSubmit=(e)=>{
@@ -58,11 +59,17 @@ function App() {
     return
   }
 
+  const handleSort=()=>{
+    setSort(!sort)
+  }
+
   return(
     <div className='page'>
         <h1> SearchMovies</h1>
         <header>
           <form className='form' onSubmit={handleSubmit}>
+            
+            {(search!=='' && movies?.length>0)&& <input type="checkbox"  onChange={handleSort} checked={sort}/> }
             <input value={search} onChange={handleChange} name='search' placeholder='avengers, startwars' 
             style={{
               border:'1px solid transparent',
