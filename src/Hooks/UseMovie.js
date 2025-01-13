@@ -7,13 +7,25 @@ import { searchMovies } from '../services/movies'
 
 export function UseMovie({search}) {
   const [movies, setMovies] = useState([])
-
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
   
 
   const getMovie=async()=>{
-    const newMovies=await searchMovies({search})
-    setMovies(newMovies)
+    try {
+      setLoading(true)
+      setError(null)
+      const newMovies=await searchMovies({search})
+      setMovies(newMovies)
+      
+
+    } catch (error) {
+      setError(error.message)
+    } finally{
+      setLoading(false )
+    }
+
   }
 
-  return {movies,getMovie}
+  return {movies,getMovie,loading,error}
 }
